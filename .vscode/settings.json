@@ -1,4 +1,11 @@
 {
   "python-envs.defaultEnvManager": "ms-python.python:venv",
-  "python-envs.pythonProjects": []
+  "python-envs.pythonProjects": [],
+  "python.defaultInterpreterPath": "python",
+  "editor.formatOnSave": true,
+  "[python]": { "editor.defaultFormatter": "ms-python.black-formatter" },
+  "ruff.enable": true,
+  "ruff.fixOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
 }
