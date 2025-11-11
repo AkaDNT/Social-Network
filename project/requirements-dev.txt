@@ -1,4 +1,0 @@
-black==24.8.0
-ruff==0.6.9
-pre-commit>=3.7.0
-pytest>=8.2.0

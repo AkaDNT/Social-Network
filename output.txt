@@ -1,0 +1,29 @@
+python models/train_timeseries.py
+[TS] Reading: D:\Projects\Social Network\project\data\processed\metrics_monthly.csv
+[TS] Train months: 2001-10..2006-09  | Test: 2006-10..2008-01
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency MS will be used.
+  self._init_dates(dates, freq)
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency MS will be used.
+  self._init_dates(dates, freq)
+[reciprocity_rate] SARIMAX  MAE=0.0000 MAPE=0.000 | Naive MAE=0.0000 MAPE=0.000
+[TS] Saved: D:\Projects\Social Network\project\data\processed\forecast_reciprocity.json
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency MS will be used.
+  self._init_dates(dates, freq)
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency MS will be used.
+  self._init_dates(dates, freq)
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\statsmodels\tsa\statespace\sarimax.py:1009: UserWarning: Non-invertible starting seasonal moving average Using zeros as starting parameters.
+  warn('Non-invertible starting seasonal moving average'
+[closure_rate] SARIMAX  MAE=0.0185 MAPE=0.373 | Naive MAE=0.0108 MAPE=0.221
+
+C:\Users\nhatt\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_logistic.py:473: ConvergenceWarning: lbfgs failed to converge after 200 iteration(s) (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT
+
+python models/train_reciprocity_lp.py
+Increase the number of iterations to improve the convergence (max_iter=200).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+[logreg] AUC=0.739 AP=0.013 P@1%=0.032
+[rf] AUC=0.835 AP=0.040 P@1%=0.064
