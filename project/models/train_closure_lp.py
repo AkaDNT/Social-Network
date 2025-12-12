@@ -117,14 +117,11 @@ print(f"[Load] Train edges: {len(E_tr):,} | Test edges: {len(E_te):,} | Δ={DELT
 # ========= TEST index for labeling =========
 
 TE_map = (
-
     E_te.groupby(["src","dst"])["ts"]
-
-        .apply(lambda s: s.to_numpy(dtype="datetime64[ns]"))
-
+        .apply(lambda s: np.sort(s.to_numpy(dtype="datetime64[ns]")))
         .to_dict()
-
 )
+
 
 
 
@@ -168,7 +165,7 @@ def collect_wedges_streaming(df: pd.DataFrame):
 
     by_src = df.groupby("src")   # B->C
 
-    commons = list(set(by_dst.groups).intersection(by_src.groups))
+    commons = sorted(set(by_dst.groups).intersection(by_src.groups))
 
     nB = len(commons)
 
@@ -487,20 +484,13 @@ def safe_ap(y_true, y_score):
 
 
 def precision_at_frac(y_true, y_score, frac: float):
-
     n = len(y_score)
-
     if n == 0:
-
         return float("nan")
-
     k = max(1, int(frac * n))
+    idx = np.argpartition(y_score, -k)[-k:]   # lấy đúng k phần tử
+    return float(np.sum(y_true[idx] == 1) / k)
 
-    thr = np.partition(y_score, -k)[-k]
-
-    tp = ((y_score >= thr).astype(int) & (y_true==1)).sum()
-
-    return float(tp / k)
 
 
 

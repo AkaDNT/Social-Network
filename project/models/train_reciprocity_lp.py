@@ -189,9 +189,9 @@ def precision_at_frac(y_true, y_score, frac: float):
     if n == 0:
         return float("nan")
     k = max(1, int(frac * n))
-    thr = np.partition(y_score, -k)[-k]
-    tp = ((y_score >= thr).astype(int) & (y_true == 1)).sum()
-    return float(tp / k)
+    idx = np.argpartition(y_score, -k)[-k:]
+    return float(np.sum(y_true[idx] == 1) / k)
+
 
 
 all_metrics = {}
