@@ -22,6 +22,11 @@ os.environ["PYTHONHASHSEED"] = "0"
 np.random.seed(42)
 random.seed(42)
 
+# ============== Params ==============
+DELTA_DAYS = 30
+DELTA = pd.Timedelta(days=DELTA_DAYS)
+
+
 # ============== Paths ==============
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw" / "wiki-talk-temporal.txt"
@@ -46,10 +51,7 @@ E_te = E[E["ts"] > cutoff].copy()
 # ============== Candidates & labels (reciprocity) ==============
 ab = (
     E_tr.groupby(["src", "dst"])
-    .agg(
-        ab_count=("ts", "count"),
-        last_ab=("ts", "max"),
-    )
+    .agg(ab_count=("ts", "count"), last_ab=("ts", "max"))
     .reset_index()
 )
 
@@ -61,34 +63,37 @@ ba = (
 )
 
 C = ab.merge(ba, on=["src", "dst"], how="left").fillna({"ba_count": 0})
-C = C[C["ba_count"] == 0].copy()  # chỉ giữ A->B chưa từng có B->A trong train
+C = C[C["ba_count"] == 0].copy()  # A->B chưa từng có B->A trong train
 
-TE_BA = (
-    E_te.groupby(["dst", "src"])
-    .size()
-    .reset_index(name="cnt")
-    .rename(columns={"dst": "src", "src": "dst"})
+# --- Label theo cửa sổ Δ ngày: B->A xảy ra trong (last_ab, last_ab + Δ]
+# Chỉ cần "lần đầu tiên" trong test vì test bắt đầu sau cutoff
+TE_first = (
+    E_te.groupby(["src", "dst"])["ts"]
+    .min()
+    .reset_index()
+    .rename(columns={"ts": "first_ts"})
 )
 
-C = C.merge(TE_BA[["src", "dst"]].assign(y=1), on=["src", "dst"], how="left")
-C["y"] = C["y"].fillna(0).astype(int)
+# map edge B->A => join vào candidate A->B (src=A,dst=B) bằng cách swap
+TE_first_ba = TE_first.rename(columns={"src": "dst", "dst": "src", "first_ts": "first_ba"})
+
+C = C.merge(TE_first_ba, on=["src", "dst"], how="left")
+
+C["y"] = (
+    C["first_ba"].notna()
+    & (C["first_ba"] <= (C["last_ab"] + DELTA))
+).astype(int)
+
+C = C.drop(columns=["first_ba"])
 
 # ổn định thứ tự để tách dữ liệu tái lập
 C = C.sort_values(["src", "dst", "last_ab", "ab_count"]).reset_index(drop=True)
 
-# chẩn đoán nhãn
 print(
-    f"[Diag] Candidates: {len(C):,} | Positives: {int(C['y'].sum()):,} | Rate: {C['y'].mean():.6f}"
+    f"[Diag] Candidates: {len(C):,} | Positives: {int(C['y'].sum()):,} | "
+    f"Rate: {C['y'].mean():.6f} | Δ={DELTA_DAYS}d"
 )
 
-# nếu không có positive → tạo một lượng nhỏ positive giả chỉ để pipeline không vỡ (tùy chọn)
-if C["y"].sum() == 0:
-    n_fake = max(1, len(C) // 1000)  # 0.1%
-    idx_fake = C.sample(n_fake, random_state=42).index
-    C.loc[idx_fake, "y"] = 1
-    print(
-        f"[Warn] No positives in labels. Injected {n_fake} synthetic positives for pipeline testing."
-    )
 
 # ============== Graph & features ==============
 Gd = nx.DiGraph()
@@ -189,9 +194,8 @@ def precision_at_frac(y_true, y_score, frac: float):
     if n == 0:
         return float("nan")
     k = max(1, int(frac * n))
-    idx = np.argpartition(y_score, -k)[-k:]
+    idx = np.argpartition(y_score, -k)[-k:]  # đúng top-k
     return float(np.sum(y_true[idx] == 1) / k)
-
 
 
 all_metrics = {}
@@ -248,6 +252,7 @@ if rf is not None and hasattr(rf, "feature_importances_"):
 
 # save meta for reproducibility
 meta = {
+    "delta_days": DELTA_DAYS,
     "cutoff": cutoff.isoformat(),
     "n_candidates": int(len(C)),
     "n_positive": int(C["y"].sum()),

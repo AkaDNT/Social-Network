@@ -255,11 +255,6 @@ if page == "Overview":
         st.markdown("**Model metrics (val split)**")
         st.dataframe(mdf, use_container_width=True)
 
-    st.info(
-        "Lưu ý: metrics trong dashboard này là trên **validation split** "
-        "được lấy từ candidates/wedges (đúng theo 2 script train của bạn)."
-    )
-
 # =========================
 # Reciprocity page
 # =========================
@@ -315,6 +310,7 @@ elif page == "Reciprocity":
     # thêm cột “predicted_edge”
     top_df["predicted_edge"] = top_df["dst"].astype(str) + " → " + top_df["src"].astype(str)
     show_cols = ["predicted_edge", "y_score", "y_true", "src", "dst", "last_ab"] + [c for c in r_feats if c in top_df.columns]
+    show_cols = list(dict.fromkeys(show_cols))
     st.dataframe(top_df[show_cols], use_container_width=True, height=420)
 
     st.markdown("---")
@@ -394,7 +390,9 @@ elif page == "Closure":
 
     base_cols = ["predicted_tie", "y_score", "y_true", "A", "B", "C", "t", "gap_days"]
     show_cols = [c for c in base_cols if c in top_df.columns] + [c for c in c_feats if c in top_df.columns]
+    show_cols = list(dict.fromkeys(show_cols))  # <-- FIX
     st.dataframe(top_df[show_cols], use_container_width=True, height=420)
+
 
     st.markdown("---")
     st.markdown("### Node / triad explorer")

@@ -56,6 +56,10 @@ DELTA = pd.Timedelta(days=DELTA_DAYS)
 
 NEG_CAP       = 200_000     # tối đa negatives giữ lại (reservoir)
 
+POS_CAP = 200_000        # max positives giữ lại (None nếu muốn giữ hết)
+
+POS_NEG_RATIO = 1.0      # giữ tối đa pos = ratio * neg (1.0 => gần 1:1)
+
 NEG_MIN       = 5_000       # tối thiểu negatives
 
 LOG_EVERY_B   = 1000        # log mỗi n node B
@@ -95,18 +99,17 @@ E = E[E["src"]!=E["dst"]].sort_values("ts").reset_index(drop=True)
 cutoff = E["ts"].quantile(0.8)
 
 E_tr = E[E["ts"]<=cutoff].copy()
-
 E_te = E[E["ts"]>cutoff].copy()
 
-
-
-# (tuỳ chọn) chỉ lấy phần train gần cutoff để bớt tổ hợp
-
 if TIME_TRIM_DAYS is not None:
-
     lo = cutoff - pd.Timedelta(days=TIME_TRIM_DAYS)
-
     E_tr = E_tr[E_tr["ts"]>=lo].copy()
+
+# Graph train để filter (A-C đã tồn tại trong train thì không gọi là closure mới)
+Gd_filter = nx.DiGraph()
+Gd_filter.add_edges_from(E_tr[["src","dst"]].itertuples(index=False, name=None))
+Gu_filter = Gd_filter.to_undirected()
+
 
 
 
@@ -213,6 +216,9 @@ def collect_wedges_streaming(df: pd.DataFrame):
 
                     continue
 
+                if Gu_filter.has_edge(a, c):
+                    continue
+
                 t2_pd = pd.Timestamp(t2s_pd[j])
 
                 t_pd  = max(t1, t2_pd)
@@ -287,13 +293,34 @@ pos_rows, neg_rows = collect_wedges_streaming(E_tr)
 
 print(f"[Wedge] Done. Pos kept: {len(pos_rows):,} | Neg kept (reservoir): {len(neg_rows):,}")
 
+def downsample(rows, k: int | None):
+    if k is None or len(rows) <= k:
+        return rows
+    idx = rng.choice(len(rows), size=k, replace=False)
+    return [rows[i] for i in idx]
+
+# 1) cap positives
+pos_keep = downsample(pos_rows, POS_CAP)
+
+# 2) enforce ratio pos <= POS_NEG_RATIO * neg
+if POS_NEG_RATIO is not None:
+    target = int(POS_NEG_RATIO * len(neg_rows))
+    if target > 0 and len(pos_keep) > target:
+        pos_keep = downsample(pos_keep, target)
+
+if len(pos_keep) == 0 or len(neg_rows) == 0:
+    raise RuntimeError("No positives or negatives after sampling—adjust caps/trim.")
+
+
+print(f"[Wedge] After balancing: Pos kept: {len(pos_keep):,} | Neg kept: {len(neg_rows):,} | Pos rate: {len(pos_keep)/(len(pos_keep)+len(neg_rows)):.4f}")
+
 
 
 # tạo DataFrame nhỏ từ hai list (an toàn RAM)
 
 cols = ["A","B","C","t1","t2","t","y"]
 
-Wsel = pd.DataFrame(pos_rows + neg_rows, columns=cols)
+Wsel = pd.DataFrame(pos_keep + neg_rows, columns=cols)
 
 Wsel = Wsel.sample(frac=1.0, random_state=42).reset_index(drop=True)
 
@@ -577,6 +604,9 @@ if hasattr(rf, "feature_importances_"):
 
 
 meta = {
+    "pos_cap": POS_CAP,
+
+    "pos_neg_ratio": POS_NEG_RATIO,
 
     "cutoff": cutoff.isoformat(),
 
