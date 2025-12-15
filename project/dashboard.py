@@ -7,7 +7,6 @@ import pandas as pd
 import streamlit as st
 import os
 
-
 from sklearn.metrics import (
     roc_curve, precision_recall_curve,
     roc_auc_score, average_precision_score,
@@ -40,7 +39,6 @@ def default_paths() -> dict[str, Path]:
     exports = root / "data" / "exports"
     return {"root": root, "processed": processed, "exports": exports}
 
-
 # =========================
 # Loaders
 # =========================
@@ -51,7 +49,6 @@ def load_json(p: Path) -> dict:
 @st.cache_data
 def load_reciprocity_preds(p: Path) -> pd.DataFrame:
     df = pd.read_csv(p)
-    # last_ab có thể là string iso; parse cho đẹp
     if "last_ab" in df.columns:
         df["last_ab"] = pd.to_datetime(df["last_ab"], errors="coerce", utc=True)
     return df
@@ -63,10 +60,6 @@ def load_closure_preds(p: Path) -> pd.DataFrame:
         if c in df.columns:
             df[c] = pd.to_datetime(df[c], errors="coerce", utc=True)
     return df
-
-@st.cache_data
-def load_csv(p: Path) -> pd.DataFrame:
-    return pd.read_csv(p)
 
 # =========================
 # Metrics utilities
@@ -80,6 +73,34 @@ def safe_ap(y_true: np.ndarray, y_score: np.ndarray) -> float:
     if y_true.sum() == 0:
         return float("nan")
     return float(average_precision_score(y_true, y_score))
+
+def safe_auc_w(y_true: np.ndarray, y_score: np.ndarray, w: np.ndarray | None) -> float:
+    if w is None:
+        return safe_auc(y_true, y_score)
+    if len(np.unique(y_true)) < 2:
+        return float("nan")
+    return float(roc_auc_score(y_true, y_score, sample_weight=w))
+
+def safe_ap_w(y_true: np.ndarray, y_score: np.ndarray, w: np.ndarray | None) -> float:
+    if w is None:
+        return safe_ap(y_true, y_score)
+    if y_true.sum() == 0:
+        return float("nan")
+    return float(average_precision_score(y_true, y_score, sample_weight=w))
+
+def make_weights_from_meta(y_true: np.ndarray, meta: dict) -> np.ndarray | None:
+    """
+    Với closure train bản weighted: meta thường có w_neg.
+    Weight scheme:
+      w_pos = 1
+      w_neg = meta["w_neg"]
+    """
+    w_neg = meta.get("w_neg", None)
+    if w_neg is None:
+        return None
+    w = np.ones(len(y_true), dtype=float)
+    w[y_true == 0] = float(w_neg)
+    return w
 
 def precision_at_k(y_true: np.ndarray, y_score: np.ndarray, k: int) -> float:
     n = len(y_score)
@@ -97,7 +118,7 @@ def threshold_for_topk(y_score: np.ndarray, k: int) -> float:
 
 def metrics_at_threshold(y_true: np.ndarray, y_score: np.ndarray, thr: float) -> dict:
     y_pred = (y_score >= thr).astype(int)
-    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0,1]).ravel()
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
     prec = tp / (tp + fp) if (tp + fp) else float("nan")
     rec  = tp / (tp + fn) if (tp + fn) else float("nan")
     fpr  = fp / (fp + tn) if (fp + tn) else float("nan")
@@ -109,7 +130,7 @@ def metrics_at_threshold(y_true: np.ndarray, y_score: np.ndarray, thr: float) ->
         "precision": float(prec), "recall": float(rec),
         "fpr": float(fpr), "tpr": float(tpr),
         "accuracy": float(acc),
-        "predicted_positive": int((y_pred==1).sum())
+        "predicted_positive": int((y_pred == 1).sum())
     }
 
 # =========================
@@ -122,8 +143,11 @@ def plot_roc(y_true: np.ndarray, y_score: np.ndarray) -> go.Figure:
         return fig
     fpr, tpr, _ = roc_curve(y_true, y_score)
     fig.add_trace(go.Scatter(x=fpr, y=tpr, mode="lines", name="ROC"))
-    fig.add_trace(go.Scatter(x=[0,1], y=[0,1], mode="lines", name="Random", line=dict(dash="dash")))
-    fig.update_layout(xaxis_title="False Positive Rate", yaxis_title="True Positive Rate", height=360, margin=dict(l=10,r=10,t=30,b=10))
+    fig.add_trace(go.Scatter(x=[0, 1], y=[0, 1], mode="lines", name="Random", line=dict(dash="dash")))
+    fig.update_layout(
+        xaxis_title="False Positive Rate", yaxis_title="True Positive Rate",
+        height=360, margin=dict(l=10, r=10, t=30, b=10)
+    )
     return fig
 
 def plot_pr(y_true: np.ndarray, y_score: np.ndarray) -> go.Figure:
@@ -133,7 +157,10 @@ def plot_pr(y_true: np.ndarray, y_score: np.ndarray) -> go.Figure:
         return fig
     precision, recall, _ = precision_recall_curve(y_true, y_score)
     fig.add_trace(go.Scatter(x=recall, y=precision, mode="lines", name="PR"))
-    fig.update_layout(xaxis_title="Recall", yaxis_title="Precision", height=360, margin=dict(l=10,r=10,t=30,b=10))
+    fig.update_layout(
+        xaxis_title="Recall", yaxis_title="Precision",
+        height=360, margin=dict(l=10, r=10, t=30, b=10)
+    )
     return fig
 
 def plot_score_hist(df: pd.DataFrame) -> go.Figure:
@@ -145,7 +172,10 @@ def plot_score_hist(df: pd.DataFrame) -> go.Figure:
         fig.update_layout(barmode="overlay")
     else:
         fig.add_trace(go.Histogram(x=df["y_score"].to_numpy(), name="score"))
-    fig.update_layout(xaxis_title="y_score", yaxis_title="count", height=280, margin=dict(l=10,r=10,t=30,b=10))
+    fig.update_layout(
+        xaxis_title="y_score", yaxis_title="count",
+        height=280, margin=dict(l=10, r=10, t=30, b=10)
+    )
     return fig
 
 def plot_calibration(y_true: np.ndarray, y_score: np.ndarray, bins: int = 10) -> go.Figure:
@@ -155,8 +185,11 @@ def plot_calibration(y_true: np.ndarray, y_score: np.ndarray, bins: int = 10) ->
         return fig
     prob_true, prob_pred = calibration_curve(y_true, y_score, n_bins=bins, strategy="uniform")
     fig.add_trace(go.Scatter(x=prob_pred, y=prob_true, mode="lines+markers", name="Calibration"))
-    fig.add_trace(go.Scatter(x=[0,1], y=[0,1], mode="lines", name="Perfect", line=dict(dash="dash")))
-    fig.update_layout(xaxis_title="Mean predicted prob", yaxis_title="Empirical positive rate", height=360, margin=dict(l=10,r=10,t=30,b=10))
+    fig.add_trace(go.Scatter(x=[0, 1], y=[0, 1], mode="lines", name="Perfect", line=dict(dash="dash")))
+    fig.update_layout(
+        xaxis_title="Mean predicted prob", yaxis_title="Empirical positive rate",
+        height=360, margin=dict(l=10, r=10, t=30, b=10)
+    )
     return fig
 
 # =========================
@@ -169,7 +202,6 @@ def row_explain_percentiles(df: pd.DataFrame, row: pd.Series, feature_cols: list
             continue
         col = df[f].to_numpy()
         val = row[f]
-        # percentile rank (robust)
         pct = float(np.mean(col <= val)) if len(col) else float("nan")
         out.append((f, float(val), pct))
     out_df = pd.DataFrame(out, columns=["feature", "value", "percentile"])
@@ -183,13 +215,17 @@ st.set_page_config(page_title="Reciprocity & Closure Dashboard", layout="wide")
 
 paths = default_paths()
 st.sidebar.header("Paths")
+
+if st.sidebar.button("Clear cache"):
+    st.cache_data.clear()
+    st.rerun()
+
 proc_dir = st.sidebar.text_input("Processed dir", str(paths["processed"]))
 exp_dir  = st.sidebar.text_input("Exports dir (optional)", str(paths["exports"]))
 
 PROC = Path(proc_dir)
 EXP  = Path(exp_dir)
 
-# validate
 need_files = [
     "reciprocity_lp_metrics.json", "reciprocity_lp_preds.csv", "reciprocity_lp_meta.json",
     "closure_lp_metrics.json", "closure_lp_preds.csv", "closure_lp_meta.json",
@@ -209,13 +245,10 @@ c_metrics = load_json(PROC / "closure_lp_metrics.json")
 r_preds = load_reciprocity_preds(PROC / "reciprocity_lp_preds.csv")
 c_preds = load_closure_preds(PROC / "closure_lp_preds.csv")
 
-# feature columns from meta (đúng theo train script)
 r_feats = list(r_meta.get("features", []))
 c_feats = list(c_meta.get("features", []))
 
-# navigation
 page = st.sidebar.radio("Page", ["Overview", "Reciprocity", "Closure", "Downloads"])
-
 st.title("Social Network Dashboard — Reciprocity & Closure")
 
 # =========================
@@ -225,6 +258,7 @@ if page == "Overview":
     st.subheader("Run summary (from meta.json)")
 
     col1, col2 = st.columns(2)
+
     with col1:
         st.markdown("### Reciprocity")
         st.write({
@@ -234,7 +268,7 @@ if page == "Overview":
             "positive_rate": r_meta.get("positive_rate"),
             "models": r_meta.get("models"),
         })
-        mdf = pd.DataFrame(r_metrics).T.reset_index().rename(columns={"index":"model"})
+        mdf = pd.DataFrame(r_metrics).T.reset_index().rename(columns={"index": "model"})
         st.markdown("**Model metrics (val split)**")
         st.dataframe(mdf, use_container_width=True)
 
@@ -249,9 +283,14 @@ if page == "Overview":
             "n_test_edges": c_meta.get("n_test_edges"),
             "n_pos_kept": c_meta.get("n_pos_kept"),
             "n_neg_kept": c_meta.get("n_neg_kept"),
+            # weighted-training meta (nếu có)
+            "neg_seen_total": c_meta.get("neg_seen_total"),
+            "w_neg": c_meta.get("w_neg"),
+            "pos_rate_sampled": c_meta.get("pos_rate_sampled"),
+            "pos_rate_est_true": c_meta.get("pos_rate_est_true"),
             "models": c_meta.get("models"),
         })
-        mdf = pd.DataFrame(c_metrics).T.reset_index().rename(columns={"index":"model"})
+        mdf = pd.DataFrame(c_metrics).T.reset_index().rename(columns={"index": "model"})
         st.markdown("**Model metrics (val split)**")
         st.dataframe(mdf, use_container_width=True)
 
@@ -267,14 +306,12 @@ elif page == "Reciprocity":
     y_true = df["y_true"].to_numpy(dtype=int)
     y_score = df["y_score"].to_numpy(dtype=float)
 
-    # headline metrics
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("AUC", f"{safe_auc(y_true, y_score):.4f}")
     c2.metric("AP", f"{safe_ap(y_true, y_score):.4f}")
-    c3.metric("P@1%", f"{precision_at_k(y_true, y_score, max(1, int(0.01*len(df)))):.4f}")
+    c3.metric("P@1%", f"{precision_at_k(y_true, y_score, max(1, int(0.01 * len(df)))):.4f}")
     c4.metric("Pos rate (val)", f"{float(y_true.mean()):.6f}")
 
-    # charts
     left, right = st.columns(2)
     with left:
         st.plotly_chart(plot_roc(y_true, y_score), use_container_width=True)
@@ -288,7 +325,8 @@ elif page == "Reciprocity":
 
     mode = st.radio("Chọn cách đặt ngưỡng", ["By threshold", "By top-K"], horizontal=True)
     if mode == "By threshold":
-        thr = st.slider("Threshold", 0.0, 1.0, float(np.quantile(y_score, 0.99)) if len(y_score) else 0.5, 0.001)
+        thr_default = float(np.quantile(y_score, 0.99)) if len(y_score) else 0.5
+        thr = st.slider("Threshold", 0.0, 1.0, thr_default, 0.001)
     else:
         k = st.slider("Top K (rows)", 50, min(20000, len(df)), min(2000, len(df)), 50)
         thr = threshold_for_topk(y_score, k)
@@ -300,14 +338,12 @@ elif page == "Reciprocity":
     mc2.metric("Precision", f"{m['precision']:.4f}")
     mc3.metric("Recall", f"{m['recall']:.4f}")
     mc4.metric("FPR", f"{m['fpr']:.4f}")
-
     st.write({"tp": m["tp"], "fp": m["fp"], "tn": m["tn"], "fn": m["fn"]})
 
     st.markdown("---")
     st.markdown("### Top predictions table (predicted reply is dst → src)")
     topn = st.slider("Show top N", 50, min(20000, len(df)), 2000, 50)
     top_df = df.sort_values("y_score", ascending=False).head(topn).copy()
-    # thêm cột “predicted_edge”
     top_df["predicted_edge"] = top_df["dst"].astype(str) + " → " + top_df["src"].astype(str)
     show_cols = ["predicted_edge", "y_score", "y_true", "src", "dst", "last_ab"] + [c for c in r_feats if c in top_df.columns]
     show_cols = list(dict.fromkeys(show_cols))
@@ -330,7 +366,7 @@ elif page == "Reciprocity":
 
     with qcol2:
         st.caption("Giải thích 1 dòng (percentile so với toàn bộ val của model)")
-        pick_i = st.number_input("Row index (0..N-1 theo bảng top)", min_value=0, max_value=max(0, len(top_df)-1), value=0)
+        pick_i = st.number_input("Row index (0..N-1 theo bảng top)", min_value=0, max_value=max(0, len(top_df) - 1), value=0)
         if len(top_df):
             row = top_df.iloc[int(pick_i)]
             exp = row_explain_percentiles(df, row, r_feats, topn=7)
@@ -349,11 +385,33 @@ elif page == "Closure":
     y_true = df["y_true"].to_numpy(dtype=int)
     y_score = df["y_score"].to_numpy(dtype=float)
 
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("AUC", f"{safe_auc(y_true, y_score):.4f}")
-    c2.metric("AP", f"{safe_ap(y_true, y_score):.4f}")
-    c3.metric("P@1%", f"{precision_at_k(y_true, y_score, max(1, int(0.01*len(df)))):.4f}")
-    c4.metric("Pos rate (val)", f"{float(y_true.mean()):.6f}")
+    w = make_weights_from_meta(y_true, c_meta)
+
+    # headline metrics
+    if w is None:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("AUC", f"{safe_auc(y_true, y_score):.4f}")
+        c2.metric("AP", f"{safe_ap(y_true, y_score):.4f}")
+        c3.metric("P@1%", f"{precision_at_k(y_true, y_score, max(1, int(0.01 * len(df)))):.4f}")
+        c4.metric("Pos rate (val)", f"{float(y_true.mean()):.6f}")
+    else:
+        st.info(
+            "Closure dùng negative sampling + sample_weight. "
+            "AUC/AP weighted phản ánh base-rate thật hơn; các plot/threshold dưới đây vẫn là unweighted trên tập sample."
+        )
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("AUC (unweighted)", f"{safe_auc(y_true, y_score):.4f}")
+        c2.metric("AP (unweighted)", f"{safe_ap(y_true, y_score):.4f}")
+        c3.metric("AUC (weighted)", f"{safe_auc_w(y_true, y_score, w):.4f}")
+        c4.metric("AP (weighted)", f"{safe_ap_w(y_true, y_score, w):.4f}")
+
+        # show base-rate info if available
+        st.caption(
+            f"pos_rate_sampled={c_meta.get('pos_rate_sampled')} | "
+            f"pos_rate_est_true={c_meta.get('pos_rate_est_true')} | "
+            f"w_neg={c_meta.get('w_neg')} | "
+            f"neg_seen_total={c_meta.get('neg_seen_total')}"
+        )
 
     left, right = st.columns(2)
     with left:
@@ -364,11 +422,12 @@ elif page == "Closure":
         st.plotly_chart(plot_score_hist(df), use_container_width=True)
 
     st.markdown("---")
-    st.markdown("### Threshold / Top-K analysis")
+    st.markdown("### Threshold / Top-K analysis (unweighted on sampled val)")
 
     mode = st.radio("Chọn cách đặt ngưỡng", ["By threshold", "By top-K"], horizontal=True)
     if mode == "By threshold":
-        thr = st.slider("Threshold", 0.0, 1.0, float(np.quantile(y_score, 0.99)) if len(y_score) else 0.5, 0.001)
+        thr_default = float(np.quantile(y_score, 0.99)) if len(y_score) else 0.5
+        thr = st.slider("Threshold", 0.0, 1.0, thr_default, 0.001)
     else:
         k = st.slider("Top K (rows)", 50, min(20000, len(df)), min(2000, len(df)), 50)
         thr = threshold_for_topk(y_score, k)
@@ -390,9 +449,8 @@ elif page == "Closure":
 
     base_cols = ["predicted_tie", "y_score", "y_true", "A", "B", "C", "t", "gap_days"]
     show_cols = [c for c in base_cols if c in top_df.columns] + [c for c in c_feats if c in top_df.columns]
-    show_cols = list(dict.fromkeys(show_cols))  # <-- FIX
+    show_cols = list(dict.fromkeys(show_cols))
     st.dataframe(top_df[show_cols], use_container_width=True, height=420)
-
 
     st.markdown("---")
     st.markdown("### Node / triad explorer")
@@ -407,11 +465,14 @@ elif page == "Closure":
             if len(sub):
                 sub = sub.sort_values("y_score", ascending=False).head(2000)
                 sub["predicted_tie"] = sub["A"].astype(str) + " ↔ " + sub["C"].astype(str)
-                st.dataframe(sub[["predicted_tie", "y_score", "y_true", "A", "B", "C", "t", "gap_days"]], use_container_width=True, height=300)
+                st.dataframe(
+                    sub[["predicted_tie", "y_score", "y_true", "A", "B", "C", "t", "gap_days"]],
+                    use_container_width=True, height=300
+                )
 
     with qcol2:
         st.caption("Giải thích 1 triad (percentile-based)")
-        pick_i = st.number_input("Row index (0..N-1 theo bảng top)", min_value=0, max_value=max(0, len(top_df)-1), value=0)
+        pick_i = st.number_input("Row index (0..N-1 theo bảng top)", min_value=0, max_value=max(0, len(top_df) - 1), value=0)
         if len(top_df):
             row = top_df.iloc[int(pick_i)]
             exp = row_explain_percentiles(df, row, c_feats, topn=7)
