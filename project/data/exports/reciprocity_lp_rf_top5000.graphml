@@ -4594,7 +4594,7 @@
     <node id="342065" />
     <node id="8304" />
     <edge source="75632" target="75624">
-      <data key="d0">0.8480429281980388</data>
+      <data key="d0">0.848042928198039</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -4660,7 +4660,7 @@
       <data key="d8">1450.0</data>
     </edge>
     <edge source="7314" target="922188">
-      <data key="d0">0.6873929706108742</data>
+      <data key="d0">0.687392970610874</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -4671,7 +4671,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="7314" target="923126">
-      <data key="d0">0.6873929706108742</data>
+      <data key="d0">0.687392970610874</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -4792,7 +4792,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="4819" target="522573">
-      <data key="d0">0.4047911980857297</data>
+      <data key="d0">0.4047911980857296</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -4869,7 +4869,7 @@
       <data key="d8">1216.0</data>
     </edge>
     <edge source="1034" target="894357">
-      <data key="d0">0.6544676159361406</data>
+      <data key="d0">0.6544676159361403</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5353,7 +5353,7 @@
       <data key="d8">2566.0</data>
     </edge>
     <edge source="3587" target="883277">
-      <data key="d0">0.6404593333654018</data>
+      <data key="d0">0.6404593333654017</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5364,7 +5364,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="3587" target="882620">
-      <data key="d0">0.6404593333654018</data>
+      <data key="d0">0.6404593333654017</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5386,7 +5386,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="1772" target="721355">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5397,7 +5397,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="697505">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5408,7 +5408,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="721819">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5419,7 +5419,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="627449">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5430,7 +5430,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="721925">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5441,7 +5441,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="721878">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5452,7 +5452,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="679372">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5463,7 +5463,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="721582">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5474,7 +5474,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="721479">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5485,7 +5485,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="1772" target="722030">
-      <data key="d0">0.6364714641316771</data>
+      <data key="d0">0.636471464131677</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -5936,7 +5936,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="5611" target="681345">
-      <data key="d0">0.6120919968370014</data>
+      <data key="d0">0.6120919968370013</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -6024,7 +6024,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="12582" target="34901">
-      <data key="d0">0.6057450518308234</data>
+      <data key="d0">0.6057450518308235</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -6035,7 +6035,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="12582" target="34900">
-      <data key="d0">0.6057450518308234</data>
+      <data key="d0">0.6057450518308235</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -6046,7 +6046,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="12582" target="34877">
-      <data key="d0">0.6057450518308234</data>
+      <data key="d0">0.6057450518308235</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -6057,7 +6057,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="12582" target="34882">
-      <data key="d0">0.6057450518308234</data>
+      <data key="d0">0.6057450518308235</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -6156,7 +6156,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="2069" target="701814">
-      <data key="d0">0.598427219754191</data>
+      <data key="d0">0.5984272197541911</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7366,7 +7366,7 @@
       <data key="d8">2.0</data>
     </edge>
     <edge source="4027" target="918401">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7377,7 +7377,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="4027" target="918320">
-      <data key="d0">0.5841747126068131</data>
+      <data key="d0">0.584174712606813</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7388,7 +7388,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918627">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7399,7 +7399,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918650">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7410,7 +7410,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918284">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7421,7 +7421,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918782">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7432,7 +7432,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918299">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7443,7 +7443,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918832">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7454,7 +7454,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918865">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7465,7 +7465,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="14864" target="918325">
-      <data key="d0">0.5849479207706343</data>
+      <data key="d0">0.5849479207706342</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7520,7 +7520,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="20904" target="896842">
-      <data key="d0">0.572055247986831</data>
+      <data key="d0">0.5720552479868309</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7575,7 +7575,7 @@
       <data key="d8">3094.0</data>
     </edge>
     <edge source="4977" target="751317">
-      <data key="d0">0.549795037908162</data>
+      <data key="d0">0.5497950379081619</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7795,7 +7795,7 @@
       <data key="d8">6.0</data>
     </edge>
     <edge source="78" target="837997">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7806,7 +7806,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838180">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7817,7 +7817,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838103">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7828,7 +7828,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838386">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7839,7 +7839,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838206">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7850,7 +7850,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838393">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7861,7 +7861,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838049">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7872,7 +7872,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838449">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7883,7 +7883,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837906">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7894,7 +7894,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838401">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7905,7 +7905,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838447">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7916,7 +7916,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838441">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7927,7 +7927,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838024">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7938,7 +7938,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838455">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7949,7 +7949,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838234">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7960,7 +7960,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="746336">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7971,7 +7971,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837996">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7982,7 +7982,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838317">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -7993,7 +7993,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837961">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8004,7 +8004,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838204">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8015,7 +8015,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838442">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8026,7 +8026,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838303">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8037,7 +8037,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838413">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8048,7 +8048,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838456">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8059,7 +8059,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838440">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8070,7 +8070,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838427">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8081,7 +8081,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838139">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8092,7 +8092,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838405">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8103,7 +8103,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838408">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8114,7 +8114,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838396">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8125,7 +8125,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838307">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8136,7 +8136,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837912">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8147,7 +8147,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837943">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8158,7 +8158,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838164">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8169,7 +8169,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838009">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8180,7 +8180,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838470">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8191,7 +8191,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837937">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8202,7 +8202,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838444">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8213,7 +8213,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837988">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8224,7 +8224,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838212">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8235,7 +8235,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="837929">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8246,7 +8246,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838295">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -8257,7 +8257,7 @@
       <data key="d8">1.0</data>
     </edge>
     <edge source="78" target="838284">
-      <data key="d0">0.4589825854415469</data>
+      <data key="d0">0.4589825854415468</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -10402,7 +10402,7 @@
       <data key="d8">44.0</data>
     </edge>
     <edge source="3239" target="857523">
-      <data key="d0">0.3759215887212506</data>
+      <data key="d0">0.3759215887212507</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -20126,7 +20126,7 @@
       <data key="d8">622.0</data>
     </edge>
     <edge source="219691" target="32658">
-      <data key="d0">0.2210212724901529</data>
+      <data key="d0">0.2210212724901528</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
@@ -38287,7 +38287,7 @@
       <data key="d8">613.0</data>
     </edge>
     <edge source="75642" target="75624">
-      <data key="d0">0.1151601654939543</data>
+      <data key="d0">0.1151601654939542</data>
       <data key="d1">rf</data>
       <data key="d2">0.0</data>
       <data key="d3">0.0</data>
