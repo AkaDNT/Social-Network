@@ -5,3 +5,6 @@ statsmodels
 scikit-learn
 pyarrow
 python-louvain
+plotly
+streamlit
+matplotlib
